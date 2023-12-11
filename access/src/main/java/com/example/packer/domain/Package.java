@@ -1,10 +1,13 @@
 package com.example.packer.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +23,9 @@ public class Package {
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "package_id", nullable = false)
-    private Set<Product> products = new LinkedHashSet<>();
+    private List<Product> products = new ArrayList<>();
 
+    public Package(List<Product> products) {
+        this.products = products;
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.packer.controller;
 
+import com.example.packer.domain.Package;
 import com.example.packer.domain.Product;
+import com.example.packer.service.PackageService;
 import com.example.packer.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final PackageService packageService;
 
     @PostMapping("/save")
     public ResponseEntity convertToProducts(@RequestBody List<String> input) {
@@ -28,6 +31,7 @@ public class ProductController {
         }
 
         productService.saveInDB(products);
+        packageService.save(new Package(products));
 
         return ResponseEntity.accepted().build();
     }
