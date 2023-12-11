@@ -10,7 +10,7 @@ This project is aimed at optimizing the packing of items into packages for shipp
 
 ### Running the Application
 
-1. Clone the repository: `git clone https://github.com/yourusername/package-optimizer.git`
+1. Clone the repository: `git clone https://github.com/mohsenr7596/package-optimizer.git`
 2. Navigate to the project directory: `cd package-optimizer`
 3. Compile the code: `javac PackageChallenge.java`
 4. Run the application: `java PackageChallenge`
