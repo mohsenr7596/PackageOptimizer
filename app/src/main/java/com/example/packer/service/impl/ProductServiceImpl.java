@@ -25,6 +25,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public double avgPrice(double minWeight, double maxWeight) {
+        Double avgPrice = productRepository.getAvgPrice(minWeight, maxWeight);
+        if (avgPrice != null) {
+            return avgPrice;
+        }
         return 0;
     }
 
