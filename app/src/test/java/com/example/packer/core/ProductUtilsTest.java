@@ -16,9 +16,9 @@ class ProductUtilsTest {
     public void test_convert_valid_input_string_to_list_of_products() {
         String input = "(1,85.31,$29) (2,14.55,$74) (3,3.98,$16)";
         List<Product> expected = new ArrayList<>();
-        expected.add(new Product(85.31, 29));
-        expected.add(new Product(14.55, 74));
-        expected.add(new Product(3.98, 16));
+        expected.add(new Product((short) 1,85.31, 29));
+        expected.add(new Product((short) 2,14.55, 74));
+        expected.add(new Product((short) 3,3.98, 16));
 
         List<Product> actual = ProductUtils.convertStringToProducts(input);
 
@@ -29,10 +29,10 @@ class ProductUtilsTest {
     // Should correctly parse a string input with weight and price attributes separated by a comma
     @Test
     void test_parse_string_with_weight_and_price_attributes() {
-        String input = "(1, 2.5, $10.99)";
+        String input = "(1, 2.5, $11)";
         Product expectedProduct = new Product();
         expectedProduct.setWeight(2.5);
-        expectedProduct.setPrice(10.99);
+        expectedProduct.setPrice(11);
 
         Product actualProduct = ProductUtils.convertStringToProduct(input);
 
@@ -43,7 +43,7 @@ class ProductUtilsTest {
     // Should correctly parse a string input with a weight attribute as a decimal number
     @Test
     void test_parse_string_with_decimal_weight_attribute() {
-        String input = "(1, 2.5, $10.99)";
+        String input = "(1, 2.5, $11)";
         double expectedWeight = 2.5;
 
         double actualWeight = ProductUtils.convertStringToProduct(input).getWeight();

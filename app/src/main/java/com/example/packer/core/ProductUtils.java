@@ -25,13 +25,15 @@ public class ProductUtils {
         String[] parts = input.split(",");
 
         // Extract attributes from the array
+        short number = Short.parseShort(parts[0].trim());
         double weight = Double.parseDouble(parts[1].trim());
 
         // Remove $ from the beginning of the value and parse it to double
-        double value = Double.parseDouble(parts[2].trim().substring(1).trim());
+        int value = Integer.parseInt(parts[2].trim().substring(1).trim());
 
         // Create an instance of the Product model
         Product product = new Product();
+        product.setNumber(number);
         product.setWeight(weight);
         product.setPrice(value);
 
