@@ -5,11 +5,9 @@ import com.example.packer.domain.Product;
 import com.example.packer.service.PackageService;
 import com.example.packer.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +20,16 @@ public class ProductController {
     private final ProductService productService;
     private final PackageService packageService;
 
-    @PostMapping("/save")
-    public ResponseEntity convertToProducts(@RequestBody List<String> input) {
-        // Perform the conversion of string list to product list
+    @PostMapping(value = "/saveInDB", consumes = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity convertToProducts(@RequestBody String input) {
+        // Perform the conversion of string list to a product list
         List<Product> products = new ArrayList<>();
-        for (var s : input) {
+        for (var s : input.split(" ")) {
             products.add(convertStringToProduct(s));
         }
 
-        productService.saveInDB(products);
         packageService.save(new Package(products));
+        productService.saveInDB(products);
 
         return ResponseEntity.accepted().build();
     }
@@ -55,6 +53,13 @@ public class ProductController {
         product.setPrice(value);
 
         return product;
+    }
+
+
+    @GetMapping("/avgPrice")
+    public double avgPrice(@RequestParam double minWeight, @RequestParam double maxWeight) {
+        // Calculate and return the average price within the given weight range
+        return productService.avgPrice(minWeight, maxWeight);
     }
 
 }

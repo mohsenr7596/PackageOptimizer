@@ -1,7 +1,6 @@
 package com.example.packer.service;
 
 import com.example.packer.domain.Product;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
