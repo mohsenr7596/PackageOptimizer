@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         private void findBestCombination(List<Product> currentCombination, double remainingWeight, List<Product> remainingProducts, int index) {
             if (index == remainingProducts.size()) {
                 // Reached the end of the products list, check if the current combination is better
-                if (calculateTotalValue(currentCombination) > calculateTotalValue(bestCombination)) {
+                if (isBetterCombination(currentCombination, bestCombination)) {
                     bestCombination = new ArrayList<>(currentCombination);
                 }
                 return;
@@ -71,12 +71,30 @@ public class ProductServiceImpl implements ProductService {
             findBestCombination(currentCombination, remainingWeight, remainingProducts, index + 1);
         }
 
-        private double calculateTotalValue(List<Product> products) {
-            double totalValue = 0;
+        private boolean isBetterCombination(List<Product> combination1, List<Product> combination2) {
+            int value1 = calculateTotalValue(combination1);
+            int value2 = calculateTotalValue(combination2);
+            double weight1 = calculateTotalWeight(combination1);
+            double weight2 = calculateTotalWeight(combination2);
+
+            // Compare based on the value and weight
+            return value1 > value2 || (value1 == value2 && weight1 < weight2);
+        }
+
+        private int calculateTotalValue(List<Product> products) {
+            int totalValue = 0;
             for (Product product : products) {
                 totalValue += product.getPrice();
             }
             return totalValue;
+        }
+
+        private double calculateTotalWeight(List<Product> products) {
+            double totalWeight = 0;
+            for (Product product : products) {
+                totalWeight += product.getWeight();
+            }
+            return totalWeight;
         }
     }
 }
