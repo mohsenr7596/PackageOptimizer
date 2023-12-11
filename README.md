@@ -12,8 +12,8 @@ This project is aimed at optimizing the packing of items into packages for shipp
 
 1. Clone the repository: `git clone https://github.com/mohsenr7596/package-optimizer.git`
 2. Navigate to the project directory: `cd package-optimizer`
-3. Compile the code: `javac PackageChallenge.java`
-4. Run the application: `java PackageChallenge`
+3. Compile the code: `mvn clean package`
+4. Run the application: `cd app && mvn spring-boot:run `
 
 ## License
 
